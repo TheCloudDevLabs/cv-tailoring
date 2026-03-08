@@ -1,0 +1,51 @@
+# CV Tailoring Skill — Configuration
+#
+# Copy this file to config.yaml and fill in your details.
+# Or run /cv-setup in Claude Code to generate it interactively.
+
+personal:
+  name: ""                # Full name as it appears on your CV
+  title: ""               # Default professional title (e.g. "Solution Architect")
+  email: ""               # Contact email
+  phone: ""               # Contact phone (e.g. "+1 555 000 0000" or "+44 7700 000000")
+  location: ""            # City and state/country (e.g. "London, UK" or "Austin, TX")
+  linkedin: ""            # LinkedIn URL without https:// (e.g. "linkedin.com/in/yourname")
+  github: ""              # GitHub URL without https:// (e.g. "github.com/yourname"). Leave empty to omit.
+  website: ""             # Personal website or portfolio URL. Leave empty to omit.
+  additional_info: ""     # Extra details for your CV header, e.g. "TS/SCI Clearance" or "Full working rights | French speaker". Leave empty to omit.
+
+writing:
+  spelling: ""                       # "Australian English", "UK English", or "US English"
+  tone: "neutral_professional"       # "neutral_professional", "conversational_polished", or "formal_traditional"
+  banned_words:                      # Words and phrases to avoid in all documents
+    - spearheaded
+    - passionate
+    - leveraged
+    - cutting-edge
+    - best-in-class
+    - thought leader
+    - innovative
+    - synergy
+  team_framing: "lead_with_contribution"  # "lead_with_contribution", "always_note_team", or "no_preference"
+  domains: []             # e.g. ["australian_government", "technology", "consulting"]
+                          # Options: australian_government, state_government, defence,
+                          #          private_sector, technology, financial_services,
+                          #          healthcare, legal, engineering, consulting, academic
+  domain_notes: ""        # Freeform domain-specific terminology or conventions
+
+cv:
+  target_pages: 3         # Target CV page length (1, 2, 3, or 4)
+  sections:               # Sections to include, in order
+    - summary
+    - skills
+    - employment
+    - certifications
+    - education
+
+# All paths are relative to the project root.
+# Override with absolute paths if your files live elsewhere.
+paths:
+  cv_variants: "cv-variants"
+  outputs: "outputs"
+  jds: "jds"
+  skills_log: "skills-log.md"
