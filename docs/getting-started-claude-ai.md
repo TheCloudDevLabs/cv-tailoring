@@ -28,13 +28,20 @@ The setup skill is generic — it works for anyone. The tailoring skill is perso
 
 ## Step 1: Get the setup skill
 
-The setup skill is included in this repository. Build the `.skill` file by running this command from the project directory:
+The setup skill is included in this repository. Build the `.skill` file by running the appropriate command for your operating system from the project directory:
 
+**macOS / Linux:**
 ```bash
 (cd .claude.ai/skills && zip -r ../../cv-tailoring-setup.skill cv-tailoring-setup/)
 ```
 
-This creates `cv-tailoring-setup.skill` in the project root, ready to import.
+**Windows (PowerShell):**
+```powershell
+Compress-Archive -Path .claude.ai/skills/cv-tailoring-setup -DestinationPath cv-tailoring-setup.zip
+Rename-Item cv-tailoring-setup.zip cv-tailoring-setup.skill
+```
+
+Both create `cv-tailoring-setup.skill` in the project root, ready to import.
 
 > If a pre-built release is available on the [Releases page](../../releases), you can download the `.skill` file directly from there instead.
 
@@ -43,10 +50,10 @@ This creates `cv-tailoring-setup.skill` in the project root, ready to import.
 ## Step 2: Import the setup skill into Claude.ai
 
 1. Go to [claude.ai](https://claude.ai) and sign in
-2. Click your profile icon or go to **Settings**
-3. Find the **Skills** section
-4. Click **Import skill** (or drag and drop the `.skill` file)
-5. Select the `cv-tailoring-setup.skill` file you downloaded
+2. Click your profile icon and select **Customizations**
+3. Go to the **Skills** tab
+4. Click **Add skill** (or drag and drop the `.skill` file)
+5. Select the `cv-tailoring-setup.skill` file you built in Step 1
 
 The "CV Tailoring Setup" skill will now appear in your skills list.
 
@@ -93,7 +100,7 @@ When setup finishes, Claude will present a `cv-tailoring.skill` file for downloa
 **To import it:**
 
 1. Download the `cv-tailoring.skill` file
-2. Go back to **Settings → Skills** in Claude.ai
+2. Go back to **Customisations > Skills** in Claude.ai
 3. Import the skill the same way you did in Step 2
 
 You now have a "CV Tailoring" skill personalised to you.
@@ -152,7 +159,8 @@ Your preferences or CV content will change over time. To update:
 1. Start a new conversation and say "set up cv tailoring" to run the setup skill again
 2. Upload any new CV files along with your existing ones
 3. Update any details that have changed
-4. Download and import the newly generated skill file, replacing the old one
+4. Download the newly generated skill file
+5. Go to **Customisations > Skills** in Claude.ai, remove the old CV Tailoring skill, and import the new one
 
 You don't need to re-answer everything — the setup skill will ask what you want to update.
 

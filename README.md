@@ -67,11 +67,21 @@ Full guide: [docs/getting-started-claude-code.md](docs/getting-started-claude-co
 ### Claude.ai
 
 1. Build the setup skill file from this repository:
+
+   **macOS / Linux:**
    ```bash
    cd cv-tailoring
    (cd .claude.ai/skills && zip -r ../../cv-tailoring-setup.skill cv-tailoring-setup/)
    ```
-2. Import `cv-tailoring-setup.skill` into Claude.ai via Settings → Skills
+
+   **Windows (PowerShell):**
+   ```powershell
+   cd cv-tailoring
+   Compress-Archive -Path .claude.ai/skills/cv-tailoring-setup -DestinationPath cv-tailoring-setup.zip
+   Rename-Item cv-tailoring-setup.zip cv-tailoring-setup.skill
+   ```
+
+2. Import `cv-tailoring-setup.skill` into Claude.ai via **Customisations > Skills**
 3. Start a new conversation and say "set up cv tailoring"
 4. Upload your CV files when prompted and follow the setup conversation
 5. At the end, download and import the personalised `cv-tailoring.skill` file
