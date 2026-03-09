@@ -1,12 +1,12 @@
-# Getting Started — Claude.ai
+# Getting Started — Claude.ai and Claude Desktop App
 
-This guide covers setting up and using the CV tailoring skill in Claude.ai — the browser-based version of Claude. No installation or technical knowledge is required.
+This guide covers setting up and using the CV tailoring skill in Claude.ai or the Claude desktop app. Both use the same skills system, so these instructions apply to either. No installation or technical knowledge is required.
 
 ---
 
 ## What you'll need
 
-- A **Claude.ai account** — create one free at [claude.ai](https://claude.ai) if you don't have one
+- A **Claude.ai account** — create one free at [claude.ai](https://claude.ai) if you don't have one (the same account works for the desktop app)
 - Your **existing CV files** — in Word (.docx), PDF, or plain text format. Multiple versions are ideal but one is enough to get started.
 - A **job description** to tailor your CV for (you can add this later)
 
@@ -47,13 +47,17 @@ Both create `cv-tailoring-setup.skill` in the project root, ready to import.
 
 ---
 
-## Step 2: Import the setup skill into Claude.ai
+## Step 2: Import the setup skill
 
+**Claude.ai (browser):**
 1. Go to [claude.ai](https://claude.ai) and sign in
 2. Click your profile icon and select **Customizations**
 3. Go to the **Skills** tab
 4. Click **Add skill** (or drag and drop the `.skill` file)
 5. Select the `cv-tailoring-setup.skill` file you built in Step 1
+
+**Claude desktop app:**
+The desktop app uses the same skills system. Open the app, go to **Customizations > Skills**, and follow the same steps above.
 
 The "CV Tailoring Setup" skill will now appear in your skills list.
 
@@ -201,3 +205,4 @@ Yes. The generated file is a standard Word document. Open it in Microsoft Word, 
 
 - Read [how it works](how-it-works.md) to understand what's happening behind the scenes
 - If you decide you'd prefer the Claude Code version (with files saved directly to your computer), see [getting started — Claude Code](getting-started-claude-code.md)
+- The Claude desktop app and Claude.ai share the same skills — a skill imported in one will appear in the other

@@ -8,15 +8,15 @@ A skill for Claude that tailors your CV to specific job descriptions through con
 
 There are two ways to use this tool. Both do the same job — choose based on what you're comfortable with.
 
-| | Claude Code | Claude.ai |
+| | Claude Code | Claude.ai / Claude desktop app |
 |---|---|---|
-| **What it is** | Claude in your terminal | Claude in your browser |
-| **Technical setup** | Requires installing a few tools | No installation — browser only |
+| **What it is** | Claude in your terminal | Claude in your browser or desktop app |
+| **Technical setup** | Requires installing a few tools | No installation required |
 | **Best for** | Developers, technical users | Anyone |
 | **Output files** | Saved directly to your computer | Downloaded from Claude |
 | **Setup guide** | [Getting started — Claude Code](docs/getting-started-claude-code.md) | [Getting started — Claude.ai](docs/getting-started-claude-ai.md) |
 
-If you've never used a terminal before, **start with Claude.ai**. If you're comfortable with the command line, either option works well.
+If you've never used a terminal before, **start with Claude.ai or the Claude desktop app**. If you're comfortable with the command line, either option works well.
 
 ---
 
@@ -64,7 +64,7 @@ Then in Claude Code, type `/cv-setup` and follow the prompts.
 
 Full guide: [docs/getting-started-claude-code.md](docs/getting-started-claude-code.md)
 
-### Claude.ai
+### Claude.ai / Claude desktop app
 
 1. Build the setup skill file from this repository:
 
@@ -86,7 +86,7 @@ Full guide: [docs/getting-started-claude-code.md](docs/getting-started-claude-co
 4. Upload your CV files when prompted and follow the setup conversation
 5. At the end, download and import the personalised `cv-tailoring.skill` file
 
-Full guide: [docs/getting-started-claude-ai.md](docs/getting-started-claude-ai.md)
+Full guide: [docs/getting-started-claude-ai.md](docs/getting-started-claude-ai.md) (also applies to the Claude desktop app)
 
 ---
 
