@@ -5,8 +5,11 @@ on:
     branches: [main]
     paths:
       - '.claude/skills/**'
+      - '.claude.ai/skills/**'
       - 'generate_cv.py'
       - 'config.example.yaml'
+      - 'scripts/**'
+      - 'references/**'
 
 permissions:
   contents: write
@@ -28,7 +31,7 @@ jobs:
           prompt: |
             Run this command and review the output:
 
-            git diff HEAD~1 HEAD -- .claude/skills/ generate_cv.py config.example.yaml
+            git diff HEAD~1 HEAD -- .claude/skills/ .claude.ai/skills/ generate_cv.py config.example.yaml scripts/ references/
 
             If any of these documentation files need updating to reflect user-facing changes, update them:
             - README.md
