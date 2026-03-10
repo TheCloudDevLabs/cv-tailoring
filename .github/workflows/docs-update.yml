@@ -1,0 +1,61 @@
+name: Docs Update
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.claude/skills/**'
+      - 'generate_cv.py'
+      - 'config.example.yaml'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Check for ANTHROPIC_API_KEY
+        run: |
+          if [ -z "${{ secrets.ANTHROPIC_API_KEY }}" ]; then
+            echo "::warning::ANTHROPIC_API_KEY secret is not set. Skipping docs update."
+            echo "docs_changed=false" >> $GITHUB_OUTPUT
+          fi
+        id: key_check
+
+      - name: Run docs updater
+        if: steps.key_check.outputs.docs_changed != 'false'
+        id: docs
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/update_docs.py
+
+      - name: Create pull request
+        if: steps.docs.outputs.docs_changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'docs: automated update for recent skill/code changes'
+          title: 'docs: automated documentation update'
+          body: |
+            This PR was automatically generated after detecting changes to skill files or code.
+
+            Claude has reviewed the changes and suggested documentation updates. Please review before merging.
+
+            Triggered by: ${{ github.sha }}
+          branch: docs/auto-update-${{ github.run_id }}
+          delete-branch: true
+          labels: documentation,automated

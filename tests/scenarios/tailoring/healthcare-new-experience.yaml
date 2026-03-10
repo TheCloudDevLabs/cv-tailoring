@@ -1,0 +1,57 @@
+name: healthcare-new-experience
+description: Tailor CV for a healthcare IT role — tests skills-log entry creation when new experience is revealed
+skill: cv-tailoring
+workspace: tests/workspace/healthcare-new-experience
+jd: tests/fixtures/jds/healthcare-it-manager.txt
+
+precondition:
+  copy_from: tests/workspace/fresh-healthcare
+  cv_variants:
+    - tests/fixtures/cvs/alex-johnson-cloud.md
+    - tests/fixtures/cvs/alex-johnson-leadership.md
+
+simulated_responses:
+  gaps:
+    - area: "HIPAA compliance experience"
+      has_experience: true
+      level: "Technical oversight"
+      roles: ["Regional Healthcare Network"]
+      clarification: "Maintained HIPAA-aligned data handling procedures for patient records infrastructure — not documented in CV"
+      # This IS new experience not in any CV variant — should trigger a skills-log entry
+    - area: "Epic EHR infrastructure"
+      has_experience: false
+      skip: true
+    - area: "Team management (3+ years)"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+    - area: "Vendor management"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+      clarification: "Managed AWS and tool vendor relationships as part of platform lead role"
+    - area: "Disaster recovery and business continuity"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Regional Healthcare Network"]
+      clarification: "Implemented Veeam backup reducing RTO from 24h to 2h — BCP planning not explicitly documented"
+      # Partially in CV but BCP planning angle is new
+    - area: "Budget management"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+  supporting_documents: "None needed"
+
+expected_outputs:
+  - file: outputs/*/Alex_Johnson_*.docx
+    must_exist: true
+  - file: skills-log.md
+    must_contain:
+      - "HIPAA"   # New experience logged from Healthcare Network role
+
+pass_criteria:
+  - .docx file created
+  - skills-log.md updated with HIPAA compliance experience entry
+  - skills-log.md entry correctly attributes experience to "Systems Administrator @ Regional Healthcare Network"
+  - BCP/DR planning entry also logged if sufficiently new
+  - Title reframed toward IT management (not cloud engineering)

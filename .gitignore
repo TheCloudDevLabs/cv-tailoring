@@ -21,8 +21,8 @@ references/writing-standards.md
 .claude/settings.json
 .claude/settings.local.json
 
-# Test outputs — generated during test runs, not committed
-tests/
+# Test workspace outputs — generated during test runs, not committed
+tests/workspace/
 
 # Python
 __pycache__/

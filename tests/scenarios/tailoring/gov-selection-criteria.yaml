@@ -1,0 +1,55 @@
+name: gov-selection-criteria
+description: Tailor CV for a government role and produce selection criteria responses
+skill: cv-tailoring
+workspace: tests/workspace/gov-selection-criteria
+jd: tests/fixtures/jds/ict-infrastructure-gov.txt
+
+precondition:
+  copy_from: tests/workspace/fresh-gov
+  cv_variants:
+    - tests/fixtures/cvs/alex-johnson-cloud.md
+
+simulated_responses:
+  gaps:
+    - area: "Essential Eight implementation"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+      clarification: "Implemented RBAC and IAM controls aligned with Essential Eight Maturity Level 2"
+    - area: "Azure Virtual Desktop"
+      has_experience: true
+      level: "Technical oversight"
+      roles: ["Regional Healthcare Network"]
+      clarification: "Led VDI migration for 200 clinical workstations — similar technology, transferable experience"
+    - area: "Azure Policy and Entra ID"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Brightfield Technology"]
+    - area: "ISM and PSPF documentation"
+      has_experience: false
+      skip: true
+    - area: "IRAP assessment support"
+      has_experience: false
+      skip: true
+    - area: "ServiceNow / ITSM"
+      has_experience: false
+      skip: true
+  supporting_documents: "Selection criteria response"
+  selection_criteria:
+    - criterion: "Technical expertise in hybrid cloud infrastructure (Azure and on-premises)"
+    - criterion: "Knowledge of the Australian Government Information Security Manual (ISM) and Essential Eight framework"
+    - criterion: "Ability to work collaboratively in a team environment and communicate effectively with technical and non-technical stakeholders"
+    - criterion: "Demonstrated experience in ICT change management and technical documentation"
+
+expected_outputs:
+  - file: outputs/*/Alex_Johnson_*.docx
+    must_exist: true
+  - file: outputs/*/Selection_Criteria_*.docx
+    must_exist: true
+
+pass_criteria:
+  - CV .docx uses Australian English spelling (organisation, programme, etc.)
+  - CV .docx uses Australian Government terminology (ISM, Essential Eight, APS)
+  - Selection criteria .docx addresses all 4 criteria
+  - Each criterion response uses STAR-style narrative format
+  - skills-log.md entry created for ISM/PSPF gap (not in any CV variant)

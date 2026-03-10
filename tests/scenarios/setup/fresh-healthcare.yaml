@@ -1,0 +1,57 @@
+name: fresh-healthcare
+description: Fresh install for a healthcare IT user, UK English, no banned words restriction
+skill: cv-setup
+workspace: tests/workspace/fresh-healthcare
+
+inputs:
+  name: "Alex Johnson"
+  title: "IT Infrastructure Manager"
+  email: "alex.johnson@example.com"
+  phone: "+44 7700 000000"
+  location: "London, UK"
+  linkedin: "linkedin.com/in/alexjohnson"
+  github: ""
+  website: ""
+  additional_info:
+    - option: "Professional registration or licence number"
+      value: "MBCS"
+  domains:
+    - "Healthcare and medical"
+    - "Private sector / corporate"
+  compliance:
+    - "Clinical data privacy (e.g. HIPAA, GDPR health data, local health records law)"
+    - "Clinical governance or patient safety standards"
+  domain_notes: "NHS context, CQC compliance, NHS Digital frameworks"
+  spelling: "UK English"
+  tone: "Neutral and professional"
+  banned_words: "No restrictions"
+  team_framing: "Lead with my contribution, note team context where relevant"
+  target_pages: "3 pages"
+  sections:
+    - "Professional summary / profile"
+    - "Core skills"
+    - "Employment history"
+    - "Certifications and training"
+    - "Education"
+  cv_files: "I'll add them later"
+
+expected_outputs:
+  - file: config.yaml
+    must_contain:
+      - "UK English"
+      - "healthcare"
+      - "MBCS"
+  - file: references/writing-standards.md
+    must_contain:
+      - "UK English"
+      - "HIPAA"
+      - "GDPR"
+      - "clinical"
+      - "organisation"  # UK English spelling check
+
+pass_criteria:
+  - config.yaml exists and is valid YAML
+  - references/writing-standards.md contains healthcare domain section
+  - references/writing-standards.md uses UK English spelling examples
+  - references/writing-standards.md does NOT contain a banned words list (no restrictions selected)
+  - skills-log.md is created

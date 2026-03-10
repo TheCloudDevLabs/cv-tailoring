@@ -1,0 +1,67 @@
+name: fresh-gov
+description: Fresh install for an Australian government and defence user
+skill: cv-setup
+workspace: tests/workspace/fresh-gov
+
+inputs:
+  name: "Alex Johnson"
+  title: "ICT Infrastructure Engineer"
+  email: "alex.johnson@example.com"
+  phone: "+61 400 000 000"
+  location: "Canberra, ACT"
+  linkedin: "linkedin.com/in/alexjohnson"
+  github: ""
+  website: ""
+  additional_info:
+    - option: "Security or government clearance"
+      value: "Baseline Security Clearance"
+  domains:
+    - "Australian Government (federal)"
+    - "Defence and intelligence"
+  compliance:
+    - "Government cybersecurity frameworks (e.g. NIST CSF, ISO 27001, ISM, Essential Eight, Cyber Essentials)"
+    - "Government security policy and protective security (e.g. PSPF, IRAP assessments, ASD Blueprint)"
+    - "Classified or national security environments (e.g. DISP, security vetting, controlled facilities)"
+  domain_notes: "APS6 level roles, uses ISM and PSPF terminology, Essential Eight is key framework"
+  spelling: "Australian English"
+  tone: "Formal and traditional"
+  banned_words: "Add my own to the defaults"
+  custom_banned_words: "utilise, learnings, actioned, going forward"
+  team_framing: "Always explicitly note when work was part of a team"
+  target_pages: "3 pages"
+  sections:
+    - "Professional summary / profile"
+    - "Core skills"
+    - "Employment history"
+    - "Certifications and training"
+    - "Education"
+  cv_files: "Files are ready"
+  cv_files_to_use:
+    - "tests/fixtures/cvs/alex-johnson-cloud.md"
+
+expected_outputs:
+  - file: config.yaml
+    must_contain:
+      - "Australian English"
+      - "australian_government"
+      - "Baseline Security Clearance"
+  - file: references/writing-standards.md
+    must_contain:
+      - "Australian English"
+      - "ISM"
+      - "PSPF"
+      - "Essential Eight"
+      - "IRAP"
+      - "PROTECTED"
+      - "utilise"  # In custom banned words
+  - file: references/cv-variants.md
+    must_contain:
+      - "alex-johnson-cloud"
+
+pass_criteria:
+  - config.yaml exists and is valid YAML
+  - references/writing-standards.md contains Australian Government terminology section
+  - references/writing-standards.md contains Defence terminology section
+  - references/writing-standards.md contains custom banned words
+  - references/cv-variants.md lists the ingested CV variant
+  - skills-log.md is created

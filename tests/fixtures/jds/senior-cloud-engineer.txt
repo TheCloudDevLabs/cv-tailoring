@@ -1,0 +1,37 @@
+Senior Cloud Engineer
+TechNova Inc — Seattle, WA (Hybrid)
+
+About the role
+
+TechNova is looking for a Senior Cloud Engineer to join our Platform Engineering team. You will design and operate our AWS-based infrastructure, improve our CI/CD pipelines, and help migrate our remaining on-premises workloads to the cloud. You will work closely with product engineering teams and report to the VP of Engineering.
+
+Responsibilities
+
+- Design and maintain AWS infrastructure using Terraform and CloudFormation
+- Manage and scale our EKS-based Kubernetes platform
+- Build and improve CI/CD pipelines using GitHub Actions
+- Define and enforce security and compliance controls (IAM, RBAC, SOC 2 alignment)
+- Monitor system health using CloudWatch, Prometheus, and Grafana
+- Lead cloud cost optimisation initiatives
+- Mentor junior engineers and contribute to team standards and documentation
+- Participate in on-call rotation and incident response
+
+Requirements
+
+- 5+ years of cloud engineering experience, primarily on AWS
+- Strong Kubernetes administration skills (EKS preferred)
+- Proficiency with Terraform for infrastructure as code
+- Experience with CI/CD pipelines (GitHub Actions, Jenkins, or similar)
+- Solid understanding of networking (VPCs, subnets, security groups, transit gateways)
+- Experience with observability tooling (CloudWatch, Prometheus, Grafana, or Datadog)
+- Familiarity with security frameworks and SOC 2 compliance requirements
+- Strong communication skills; comfortable working with senior stakeholders
+
+Nice to have
+
+- AWS certifications (Solutions Architect Professional or DevOps Engineer Professional)
+- Experience with multi-account AWS organisations and landing zones
+- Exposure to FinOps practices and cloud cost management
+- Prior experience in financial services or regulated environments
+
+Salary: $160,000 – $190,000 + equity

@@ -1,0 +1,63 @@
+name: rerun-update-prefs
+description: Re-run setup on an existing config — update writing preferences only, skip all other steps
+skill: cv-setup
+workspace: tests/workspace/rerun-update-prefs
+
+# This scenario requires a pre-existing config.yaml in the workspace.
+# The test runner should copy tests/workspace/fresh-tech/config.yaml here first,
+# or create a minimal one from the template below.
+precondition:
+  create_config: |
+    personal:
+      name: "Alex Johnson"
+      title: "Cloud Engineer"
+      email: "alex.johnson@example.com"
+      phone: "+1 555 000 0000"
+      location: "Seattle, WA"
+      linkedin: "linkedin.com/in/alexjohnson"
+      github: "github.com/alexjohnson"
+      website: ""
+      additional_info: ""
+    writing:
+      spelling: "US English"
+      tone: "neutral_professional"
+      banned_words: ["spearheaded", "passionate", "leveraged"]
+      team_framing: "lead_with_contribution"
+      domains: ["technology"]
+      domain_notes: ""
+    cv:
+      target_pages: 2
+      sections: [summary, skills, employment, certifications]
+    paths:
+      cv_variants: "cv-variants"
+      outputs: "outputs"
+      jds: "jds"
+      skills_log: "skills-log.md"
+
+inputs:
+  update_section: "Writing preferences"  # Select this when asked what to update
+  # Only writing preferences are updated:
+  spelling: "UK English"            # Changed from US English
+  tone: "Conversational but polished"   # Changed from neutral
+  banned_words: "Add my own to the defaults"
+  custom_banned_words: "utilise, learnings"
+  team_framing: "No special handling needed"  # Changed
+
+expected_outputs:
+  - file: config.yaml
+    must_contain:
+      - "UK English"
+      - "Conversational"
+      - "utilise"
+    must_not_contain:
+      - "US English"
+  - file: references/writing-standards.md
+    must_contain:
+      - "UK English"
+      - "utilise"  # Custom banned word added
+
+pass_criteria:
+  - config.yaml updated with new writing preferences
+  - Personal details unchanged (name still "Alex Johnson", email unchanged)
+  - references/writing-standards.md regenerated with updated preferences
+  - cv-variants.md NOT regenerated (skipped — only writing prefs updated)

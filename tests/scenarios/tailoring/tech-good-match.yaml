@@ -1,0 +1,49 @@
+name: tech-good-match
+description: Tailor CV for a role that closely matches the candidate's existing experience
+skill: cv-tailoring
+workspace: tests/workspace/tech-good-match
+jd: tests/fixtures/jds/senior-cloud-engineer.txt
+
+precondition:
+  # Use the fresh-tech workspace as the configured environment
+  copy_from: tests/workspace/fresh-tech
+  cv_variants:
+    - tests/fixtures/cvs/alex-johnson-cloud.md
+
+simulated_responses:
+  # The tailoring skill asks gap questions — these are the predefined answers
+  gaps:
+    - area: "Multi-account AWS landing zone"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+    - area: "SOC 2 compliance alignment"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+    - area: "On-call rotation and incident response"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp", "Brightfield Technology"]
+    - area: "FinOps / cloud cost management"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+  supporting_documents: "None needed"
+
+expected_outputs:
+  - file: outputs/*/Alex_Johnson_*.docx
+    must_exist: true
+  - file: outputs/*/JD_*.txt
+    must_exist: true
+  - file: cv-variants/Alex_Johnson_*.md
+    must_exist: true  # Archived variant
+
+pass_criteria:
+  - .docx file is created in outputs/ subdirectory
+  - .docx is readable by python-docx
+  - .docx contains name "Alex Johnson"
+  - .docx contains role title matching the JD
+  - JD archive file is created alongside the .docx
+  - Tailored CV is saved as new variant in cv-variants/
+  - No skills-log entries added (no new experience discovered)

@@ -1,0 +1,56 @@
+name: leadership-gap-heavy
+description: Tailor CV for a leadership role with significant gaps — tests question flow depth
+skill: cv-tailoring
+workspace: tests/workspace/leadership-gap-heavy
+jd: tests/fixtures/jds/platform-engineering-lead.txt
+
+precondition:
+  copy_from: tests/workspace/fresh-tech
+  cv_variants:
+    - tests/fixtures/cvs/alex-johnson-cloud.md
+    - tests/fixtures/cvs/alex-johnson-leadership.md
+
+simulated_responses:
+  gaps:
+    - area: "Team hiring and management (3+ years)"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+      clarification: "Grew team from 4 to 8 over 18 months, hired 4 engineers"
+    - area: "C-suite / board-level stakeholder presentations"
+      has_experience: true
+      level: "Technical oversight"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+      clarification: "Presented quarterly roadmap to client CTO and VP Engineering"
+    - area: "Budget management ($3-5M)"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+      clarification: "Owned $2.4M AWS infrastructure budget"
+    - area: "Internal developer platform (Backstage or similar)"
+      has_experience: false
+      skip: true
+    - area: "PCI-DSS compliance"
+      has_experience: false
+      skip: true
+    - area: "Multi-cloud architecture (AWS + Azure)"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp", "Brightfield Technology"]
+    - area: "SLO definition and reliability targets"
+      has_experience: true
+      level: "Technical oversight"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+      clarification: "Defined availability SLOs after implementing Prometheus/Grafana observability stack"
+  supporting_documents: "None needed"
+
+expected_outputs:
+  - file: outputs/*/Alex_Johnson_*.docx
+    must_exist: true
+
+pass_criteria:
+  - .docx file is created
+  - skills-log.md is NOT updated (no genuinely new experience — gaps were answered from existing CV content)
+  - Profile and title reframed toward engineering leadership
+  - Leadership CV variant used as primary base
+  - Cloud CV used to supplement technical detail

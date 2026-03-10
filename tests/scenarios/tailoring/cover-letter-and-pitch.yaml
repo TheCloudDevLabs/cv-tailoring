@@ -1,0 +1,40 @@
+name: cover-letter-and-pitch
+description: Tailor CV then produce both a cover letter and pitch document in the same session
+skill: cv-tailoring
+workspace: tests/workspace/cover-letter-and-pitch
+jd: tests/fixtures/jds/senior-cloud-engineer.txt
+
+precondition:
+  copy_from: tests/workspace/fresh-tech
+  cv_variants:
+    - tests/fixtures/cvs/alex-johnson-cloud.md
+
+simulated_responses:
+  gaps:
+    - area: "FinOps / cloud cost optimisation"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+    - area: "On-call and incident response"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp", "Brightfield Technology"]
+  supporting_documents:
+    - "Cover letter"
+    - "Pitch document"
+  recruiter_name: "TechNova Talent Team"
+
+expected_outputs:
+  - file: outputs/*/Alex_Johnson_*.docx
+    must_exist: true
+  - file: outputs/*/Cover_Letter_*.docx
+    must_exist: true
+  - file: outputs/*/Pitch_*.docx
+    must_exist: true
+
+pass_criteria:
+  - All three .docx files created in the same output subfolder
+  - Cover letter is one page (word count under ~350 words)
+  - Cover letter does not open with "I am writing to apply for"
+  - Pitch document has clear opening statement, alignment areas, and engagement approach sections
+  - All three documents use the same writing standards (US English, neutral tone)

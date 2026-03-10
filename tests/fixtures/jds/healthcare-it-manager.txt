@@ -1,0 +1,40 @@
+IT Infrastructure Manager
+Northside Health System — Chicago, IL
+
+About the role
+
+Northside Health System is looking for an experienced IT Infrastructure Manager to lead our infrastructure team and oversee the delivery of reliable, secure, and compliant IT services across our hospital network. You will manage a team of 8 infrastructure and systems staff and report to the Chief Information Officer.
+
+Responsibilities
+
+- Lead, mentor, and manage a team of 8 infrastructure engineers and administrators
+- Own the organisation's on-premises and hybrid cloud infrastructure strategy
+- Ensure infrastructure compliance with HIPAA, HITECH, and SOC 2 requirements
+- Manage relationships with key vendors including Microsoft, VMware, and Cisco
+- Own the infrastructure capital and operational budget ($4M annually)
+- Drive adoption of cloud services (Microsoft Azure) for clinical and administrative systems
+- Establish and maintain disaster recovery and business continuity plans
+- Oversee identity and access management (Active Directory, Entra ID, MFA)
+- Manage EHR infrastructure (Epic) in partnership with clinical informatics teams
+- Lead the infrastructure components of the organisation's ongoing cloud migration
+
+Requirements
+
+- 7+ years of IT infrastructure experience
+- 3+ years in a management or team lead role
+- Strong knowledge of HIPAA and healthcare IT compliance requirements
+- Experience with Microsoft Azure and hybrid cloud environments
+- VMware vSphere administration experience
+- Active Directory and Microsoft 365 administration
+- Experience with EHR systems (Epic preferred)
+- Demonstrated budget management experience
+- Strong vendor management and stakeholder communication skills
+
+Nice to have
+
+- Microsoft Azure certifications
+- Experience with clinical network segmentation and medical device security
+- Knowledge of HL7 or FHIR integration standards
+- ITIL Foundation or higher
+
+Salary: $130,000 – $155,000 + benefits

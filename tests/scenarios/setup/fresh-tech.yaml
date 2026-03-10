@@ -1,0 +1,57 @@
+name: fresh-tech
+description: Fresh install for a technology and private sector user with no existing config
+skill: cv-setup
+workspace: tests/workspace/fresh-tech
+
+inputs:
+  name: "Alex Johnson"
+  title: "Cloud Engineer"
+  email: "alex.johnson@example.com"
+  phone: "+1 555 000 0000"
+  location: "Seattle, WA"
+  linkedin: "linkedin.com/in/alexjohnson"
+  github: "github.com/alexjohnson"
+  website: ""
+  additional_info: []  # Select "None"
+  domains:
+    - "Technology / software / startups"
+    - "Private sector / corporate"
+  compliance:
+    - "Information security certification (e.g. ISO 27001, SOC 2, Cyber Essentials)"
+  domain_notes: ""
+  spelling: "US English"
+  tone: "Neutral and professional"
+  banned_words: "Use the suggested defaults"
+  team_framing: "Lead with my contribution, note team context where relevant"
+  target_pages: "2 pages"
+  sections:
+    - "Professional summary / profile"
+    - "Core skills"
+    - "Employment history"
+    - "Certifications and training"
+  cv_files: "I'll add them later"
+
+expected_outputs:
+  - file: config.yaml
+    must_contain:
+      - "alex.johnson@example.com"
+      - "Alex Johnson"
+      - "Cloud Engineer"
+      - "Seattle, WA"
+      - "US English"
+      - "technology"
+  - file: references/writing-standards.md
+    must_contain:
+      - "US English"
+      - "ISO 27001"
+      - "SOC 2"
+      - "spearheaded"  # In banned words list
+  - file: references/cv-variants.md
+    must_contain:
+      - "no variants"  # Placeholder since files added later
+
+pass_criteria:
+  - config.yaml exists and is valid YAML
+  - references/writing-standards.md exists and contains technology domain section
+  - references/cv-variants.md exists with placeholder message
+  - skills-log.md is created

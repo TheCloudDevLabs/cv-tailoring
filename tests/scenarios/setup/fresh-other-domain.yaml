@@ -1,0 +1,61 @@
+name: fresh-other-domain
+description: Fresh install where user selects "Other" for domain and provides a custom description
+skill: cv-setup
+workspace: tests/workspace/fresh-other-domain
+
+inputs:
+  name: "Alex Johnson"
+  title: "Maritime Systems Engineer"
+  email: "alex.johnson@example.com"
+  phone: "+47 900 00000"
+  location: "Oslo, Norway"
+  linkedin: "linkedin.com/in/alexjohnson"
+  github: ""
+  website: "alexjohnson.no"
+  additional_info:
+    - option: "Professional registration or licence number"
+      value: "Chartered Engineer (CEng)"
+    - option: "Work authorisation or visa status"
+      value: "EU Citizen — full working rights"
+  domains:
+    - "Other"
+  other_domain_description: "Maritime industry — vessel automation and control systems, SCADA, offshore oil and gas infrastructure"
+  compliance:
+    - "Industry standards bodies (e.g. ISO, IEC, ASME)"
+    - "Other compliance or regulatory context (I'll describe it)"
+  other_compliance_description: "DNV GL maritime standards, IMO MARPOL compliance, SOLAS requirements"
+  domain_notes: "Uses IEC 61508 for functional safety, DNV classification society rules apply"
+  spelling: "UK English"
+  tone: "Formal and traditional"
+  banned_words: "I have my own list"
+  custom_banned_words: "innovative, spearheaded, passionate, leverage, synergy, disruptive"
+  team_framing: "Lead with my contribution, note team context where relevant"
+  target_pages: "3 pages"
+  sections:
+    - "Professional summary / profile"
+    - "Core skills"
+    - "Employment history"
+    - "Certifications and training"
+    - "Education"
+    - "Publications or patents"
+  cv_files: "I don't have any yet"
+
+expected_outputs:
+  - file: config.yaml
+    must_contain:
+      - "UK English"
+      - "maritime"
+  - file: references/writing-standards.md
+    must_contain:
+      - "maritime"
+      - "DNV"
+      - "SOLAS"
+      - "innovative"  # In custom banned words
+
+pass_criteria:
+  - config.yaml exists and is valid YAML
+  - references/writing-standards.md reflects the custom domain description
+  - references/writing-standards.md contains the custom compliance notes
+  - references/writing-standards.md contains ONLY the user's custom banned word list (not the defaults)
+  - references/cv-variants.md exists with placeholder (no files yet)
+  - Publications section is included in config cv.sections

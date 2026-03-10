@@ -1,0 +1,40 @@
+ICT Infrastructure Engineer
+Department of Social Services — Canberra, ACT
+Ongoing APS6 | Requires Baseline Security Clearance
+
+About the role
+
+The Department of Social Services is seeking an experienced ICT Infrastructure Engineer to join the Digital Infrastructure and Platforms Branch. You will support the delivery and operation of the Department's on-premises and hybrid cloud infrastructure, contributing to the Department's cloud adoption programme.
+
+Key responsibilities
+
+- Manage and maintain hybrid cloud infrastructure across Azure and on-premises environments
+- Contribute to the Department's Azure landing zone and cloud governance implementation
+- Support implementation of the Essential Eight mitigation strategies across the infrastructure estate
+- Operate and maintain virtual server infrastructure (VMware, Hyper-V)
+- Manage Active Directory, Entra ID, and Microsoft 365 services
+- Produce and maintain technical documentation in line with ISM requirements
+- Participate in change advisory board (CAB) and change management processes
+- Support IRAP assessment activities and maintain system security plans
+
+Selection criteria
+
+1. Technical expertise in hybrid cloud infrastructure (Azure and on-premises)
+2. Knowledge of the Australian Government Information Security Manual (ISM) and Essential Eight framework
+3. Ability to work collaboratively in a team environment and communicate effectively with technical and non-technical stakeholders
+4. Demonstrated experience in ICT change management and technical documentation
+
+Requirements
+
+- Baseline security clearance (or eligibility to obtain)
+- 3+ years of experience in ICT infrastructure engineering
+- Strong Azure skills, particularly Azure Virtual Desktop, Entra ID, and Azure Policy
+- Experience with Windows Server, Active Directory, and Group Policy
+- Knowledge of Australian Government ICT policies and frameworks
+- Australian citizenship required
+
+Desirable
+
+- Microsoft certifications (AZ-104, AZ-500, or similar)
+- Experience with PSPF protective markings and handling requirements
+- Exposure to ServiceNow or similar ITSM platforms
