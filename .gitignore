@@ -21,6 +21,9 @@ references/writing-standards.md
 .claude/settings.json
 .claude/settings.local.json
 
+# Claude Code project instructions — contains personal workflow rules, never commit
+CLAUDE.md
+
 # Test workspace outputs — generated during test runs, not committed
 tests/workspace/
 
