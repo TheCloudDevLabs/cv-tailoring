@@ -32,24 +32,33 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_bots: "clouddevlabsclaude"
           prompt: |
-            Review the current state of these files for any changes that affect user-facing documentation:
-            - .claude/skills/
-            - .claude.ai/skills/
+            Your job is to ensure the documentation accurately describes every user-facing feature and behaviour in the skill files and code.
+
+            Step 1: Read ALL of these source-of-truth files in full:
+            - .claude/skills/cv-setup/SKILL.md
+            - .claude/skills/cv-tailoring/SKILL.md
+            - .claude.ai/skills/cv-tailoring-setup/SKILL.md
             - generate_cv.py
             - config.example.yaml
-            - scripts/
-            - references/
 
-            If any of these documentation files need updating to reflect the current state, update them:
+            Step 2: Read ALL of these documentation files in full:
             - README.md
             - docs/getting-started-claude-code.md
             - docs/getting-started-claude-ai.md
             - docs/how-it-works.md
 
+            Step 3: Compare. For every user-facing capability in the skill files (input methods, process steps, output types, configuration options, commands), check whether the documentation accurately describes it. Look for:
+            - Features in the skills that the docs don't mention at all
+            - Features the docs describe that no longer work that way
+            - Process steps that have changed (new steps added, steps reordered, steps removed)
+            - New input methods, output types, or configuration options not reflected in docs
+
+            Step 4: Update any documentation file that is out of date. Apply changes directly — do not list what needs changing, just fix it.
+
             Rules:
-            - Only update docs for substantive, user-facing changes (new features, changed behaviour, renamed commands, new requirements)
+            - Only update for substantive, user-facing differences (new features, changed behaviour, renamed commands, new requirements)
             - Do not make cosmetic or stylistic changes
             - Preserve the existing tone, structure, and formatting of each document
-            - If no updates are needed, do nothing
+            - If everything is already accurate, do nothing
 
             If you make changes, commit them with the message "docs: update for recent skill/code changes".
