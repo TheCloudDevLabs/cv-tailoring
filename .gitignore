@@ -24,9 +24,18 @@ references/writing-standards.md
 # Claude Code project instructions — contains personal workflow rules, never commit
 CLAUDE.md
 
+# Project memory — personal session context, never commit
+MEMORY.md
+
 # Test workspace outputs — generated during test runs, not committed
 tests/workspace/
 
 # Python
 __pycache__/
 *.pyc
+
+# Scripts — helper scripts that may be copied into repo, never commit
+scripts/
+
+# Claude plans and docs — local only
+docs/plans/
