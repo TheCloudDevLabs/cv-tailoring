@@ -254,6 +254,18 @@ Each output folder must contain:
 
 Do not save generated .docx files to the project root.
 
+#### Output confirmation
+
+After the generation script completes successfully, present a clear summary to the user listing every file created in the output folder. Use this format:
+
+> **CV generated successfully.** The following files have been saved to `outputs/[folder name]/`:
+>
+> - `Name_Title.docx` — Tailored CV
+> - `JD_Org_RoleType.txt` — Job description text
+> - `JD_Org_RoleType_original.docx` — Original JD file *(only if a .docx JD was provided)*
+
+Include the full relative path for each file. If the generation script fails, report the error clearly and do not proceed to the variant archive step.
+
 #### CV variant archive
 
 After generating the .docx file, also save the final tailored CV content as a Markdown file in the `cv-variants/` directory. Use the naming convention:
