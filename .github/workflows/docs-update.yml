@@ -1,6 +1,7 @@
 name: Docs Update
 
 on:
+  workflow_dispatch:
   pull_request:
     branches: [main]
     paths:
@@ -22,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.head_ref || github.ref }}
           fetch-depth: 0
 
       - name: Update docs with Claude
@@ -30,11 +31,15 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           direct_prompt: |
-            Run this command and review the output:
+            Review the current state of these files for any changes that affect user-facing documentation:
+            - .claude/skills/
+            - .claude.ai/skills/
+            - generate_cv.py
+            - config.example.yaml
+            - scripts/
+            - references/
 
-            git diff origin/main...HEAD -- .claude/skills/ .claude.ai/skills/ generate_cv.py config.example.yaml scripts/ references/
-
-            If any of these documentation files need updating to reflect user-facing changes, update them:
+            If any of these documentation files need updating to reflect the current state, update them:
             - README.md
             - docs/getting-started-claude-code.md
             - docs/getting-started-claude-ai.md
@@ -46,4 +51,4 @@ jobs:
             - Preserve the existing tone, structure, and formatting of each document
             - If no updates are needed, do nothing
 
-            If you make changes, commit them to this branch with the message "docs: update for recent skill/code changes".
+            If you make changes, commit them with the message "docs: update for recent skill/code changes".
