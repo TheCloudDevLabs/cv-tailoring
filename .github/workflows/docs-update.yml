@@ -1,7 +1,8 @@
 name: Docs Update
 
 on:
-  push:
+  workflow_dispatch:
+  pull_request:
     branches: [main]
     paths:
       - '.claude/skills/**'
@@ -22,18 +23,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          ref: ${{ github.head_ref || github.ref }}
+          fetch-depth: 0
 
       - name: Update docs with Claude
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: |
-            Run this command and review the output:
+          direct_prompt: |
+            Review the current state of these files for any changes that affect user-facing documentation:
+            - .claude/skills/
+            - .claude.ai/skills/
+            - generate_cv.py
+            - config.example.yaml
+            - scripts/
+            - references/
 
-            git diff HEAD~1 HEAD -- .claude/skills/ .claude.ai/skills/ generate_cv.py config.example.yaml scripts/ references/
-
-            If any of these documentation files need updating to reflect user-facing changes, update them:
+            If any of these documentation files need updating to reflect the current state, update them:
             - README.md
             - docs/getting-started-claude-code.md
             - docs/getting-started-claude-ai.md
@@ -43,6 +49,6 @@ jobs:
             - Only update docs for substantive, user-facing changes (new features, changed behaviour, renamed commands, new requirements)
             - Do not make cosmetic or stylistic changes
             - Preserve the existing tone, structure, and formatting of each document
-            - If no updates are needed, do nothing and do not create a PR
+            - If no updates are needed, do nothing
 
-            If you make any changes, create a pull request titled "docs: automated update for recent skill/code changes" with a clear description of what was updated and why.
+            If you make changes, commit them with the message "docs: update for recent skill/code changes".
