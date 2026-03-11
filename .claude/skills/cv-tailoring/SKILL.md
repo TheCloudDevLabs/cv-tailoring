@@ -67,8 +67,8 @@ doc = Document('/path/to/jd.docx')
 text = []
 for element in doc.element.body:
     if element.tag.endswith('}p'):
-        t = element.text
-        if t and t.strip():
+        t = ''.join((r.text or '') for r in element.iter() if r.tag.endswith('}t'))
+        if t.strip():
             text.append(t)
     elif element.tag.endswith('}tbl'):
         for row in element.iter():
