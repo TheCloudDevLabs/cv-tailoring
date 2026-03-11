@@ -11,7 +11,7 @@ Before doing anything else, read `config.yaml` from the project root, then read 
 
 ## Trigger
 
-The user provides a job description — either by pasting it as text or by supplying a path to a `.docx` file — and says something like "tailor a CV for this." If the role has a specific emphasis not obvious from the title (for example, a Solution Architect role that is primarily governance-focused), the user may flag that alongside the job description.
+The user provides a job description — either by pasting it as text, by supplying a path to a `.docx` file, or by providing a URL to a job listing — and says something like "tailor a CV for this." If the role has a specific emphasis not obvious from the title (for example, a Solution Architect role that is primarily governance-focused), the user may flag that alongside the job description.
 
 ## File locations
 
@@ -48,15 +48,38 @@ If the name or email is empty, prompt the user to run `/cv-setup`.
 
 Follow these steps in order for each new application.
 
-### Step 0. Extract JD text (if a .docx file was provided)
+### Step 0. Extract JD text
 
-If the user has provided a file path to a `.docx` file rather than pasting text, extract the full text before doing anything else. Use this bash command:
+If the user has provided a URL, extract the JD using WebFetch:
+
+```
+WebFetch(url=<the URL>, prompt="Extract the full job description including role title, responsibilities, requirements, and selection criteria. Return the complete text without summarising.")
+```
+
+Store the result as the working JD for all subsequent steps.
+
+If the user has provided a file path to a `.docx` file rather than pasting text, extract the full text. Use this bash command:
 
 ```bash
 python3 -c "
 from docx import Document
 doc = Document('/path/to/jd.docx')
-print('\n'.join(p.text for p in doc.paragraphs if p.text.strip()))
+text = []
+for element in doc.element.body:
+    if element.tag.endswith('}p'):
+        t = ''.join((r.text or '') for r in element.iter() if r.tag.endswith('}t'))
+        if t.strip():
+            text.append(t)
+    elif element.tag.endswith('}tbl'):
+        for row in element.iter():
+            if row.tag.endswith('}tr'):
+                cells = []
+                for cell in row:
+                    if cell.tag.endswith('}tc'):
+                        cells.append(''.join((r.text or '') for r in cell.iter() if r.tag.endswith('}t')))
+                if any(c.strip() for c in cells):
+                    text.append(' | '.join(cells))
+print('\n'.join(text))
 "
 ```
 
@@ -66,7 +89,9 @@ Replace `/path/to/jd.docx` with the actual path the user supplied. If `python-do
 pandoc --to plain /path/to/jd.docx
 ```
 
-Store the extracted text as the working JD for all subsequent steps. If neither tool is available, ask the user to paste the text directly.
+If the user pasted text directly, use it as-is.
+
+Store the extracted text as the working JD for all subsequent steps. If a `.docx` was provided and neither extraction tool is available, ask the user to paste the text directly.
 
 ### Step 1. Read config and all CV variants
 
@@ -246,6 +271,27 @@ If the role type is already represented by an existing variant with no meaningfu
 ```
 
 This preserves the tailored content as a source-of-truth variant for future sessions to draw on.
+
+#### Update variant index
+
+After saving the new variant, use an `AskUserQuestion` prompt:
+
+> "A new CV variant was saved to `cv-variants/`. Would you like to update the variant index?"
+>
+> **Yes** — The new variant will be included in future tailoring sessions. Its content will be available during gap analysis and can be drawn on when building CVs for similar roles.
+>
+> **No** — The variant file is still saved, but future sessions won't know it exists. Content from this variant won't be considered during gap analysis.
+
+If yes:
+
+1. Read the newly saved variant `.md` file
+2. Generate a one to two sentence description of its focus and emphasis
+3. Append a new entry to `references/cv-variants.md` under the `## Variant inventory` section:
+
+```markdown
+### [variant-filename.md]
+[One to two sentence description of the variant's focus and emphasis.]
+```
 
 ### Step 7. Supporting documents
 

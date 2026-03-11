@@ -217,9 +217,23 @@ If "Files are ready":
 python3 -c "
 from docx import Document
 doc = Document('cv-variants/FILENAME.docx')
-text = '\n\n'.join(p.text for p in doc.paragraphs if p.text.strip())
+text = []
+for element in doc.element.body:
+    if element.tag.endswith('}p'):
+        t = ''.join((r.text or '') for r in element.iter() if r.tag.endswith('}t'))
+        if t.strip():
+            text.append(t)
+    elif element.tag.endswith('}tbl'):
+        for row in element.iter():
+            if row.tag.endswith('}tr'):
+                cells = []
+                for cell in row:
+                    if cell.tag.endswith('}tc'):
+                        cells.append(''.join((r.text or '') for r in cell.iter() if r.tag.endswith('}t')))
+                if any(c.strip() for c in cells):
+                    text.append(' | '.join(cells))
 with open('cv-variants/FILENAME.md', 'w') as f:
-    f.write(text)
+    f.write('\n\n'.join(text))
 print('Converted: FILENAME.docx -> FILENAME.md')
 "
 ```

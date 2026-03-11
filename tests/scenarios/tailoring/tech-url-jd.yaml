@@ -1,0 +1,40 @@
+name: tech-url-jd
+description: Tailor CV using a JD provided as a URL instead of text or .docx
+skill: cv-tailoring
+workspace: tests/workspace/tech-url-jd
+jd_url: "https://example.com/jobs/senior-cloud-engineer"
+
+precondition:
+  copy_from: tests/workspace/fresh-tech
+  cv_variants:
+    - tests/fixtures/cvs/alex-johnson-cloud.md
+
+simulated_responses:
+  gaps:
+    - area: "Multi-account AWS landing zone"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+    - area: "SOC 2 compliance alignment"
+      has_experience: true
+      level: "Hands-on delivery"
+      roles: ["Senior Cloud Engineer at Acme Corp"]
+  supporting_documents: "None needed"
+  variant_index_update: "Yes"
+
+expected_outputs:
+  - file: outputs/*/Alex_Johnson_*.docx
+    must_exist: true
+  - file: outputs/*/JD_*.txt
+    must_exist: true
+  - file: cv-variants/Alex_Johnson_*.md
+    must_exist: true
+
+pass_criteria:
+  - JD is extracted from URL via WebFetch (not pasted or from .docx)
+  - Step 0 uses WebFetch tool with the provided URL
+  - JD text is stored and used for gap analysis
+  - .docx file is created in outputs/ subdirectory
+  - Tailored CV is saved as new variant in cv-variants/
+  - Variant index update prompt is presented after saving
+  - references/cv-variants.md is updated with the new variant entry
