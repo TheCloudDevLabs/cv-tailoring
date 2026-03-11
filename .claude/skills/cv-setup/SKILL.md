@@ -1,6 +1,6 @@
 ---
 name: cv-setup
-description: "Interactive setup for the CV tailoring skill. Run this when you first clone the repo or when you want to update your configuration. Collects personal details, domain configuration, and writing preferences, then generates all reference files from scratch. Trigger when the user runs /cv-setup, asks to set up or configure the CV tailoring skill, or wants to update their personal details or preferences."
+description: "Interactive setup for the CV tailoring skill. Run this when you first clone the repo or when you want to update your configuration. Collects personal details, domain configuration, and writing preferences, then generates all reference files from scratch. Also supports a CV-only re-run that just re-ingests CV files and updates the variant index. Trigger when the user runs /cv-setup, asks to set up or configure the CV tailoring skill, wants to update their personal details or preferences, or wants to re-ingest CV files."
 ---
 
 # CV Setup
@@ -11,7 +11,18 @@ Interactive onboarding for the CV tailoring skill. Generates `config.yaml`, `ref
 
 Check whether `config.yaml` exists in the project root.
 
-- If it exists, read it and use an `AskUserQuestion` prompt to ask what they want to update: personal details, domain configuration, writing preferences, CV ingestion, or everything. Skip to the relevant step.
+- If it exists, read it and use an `AskUserQuestion` prompt to ask what they want to update:
+
+  > "What would you like to update?"
+
+  Options:
+  - **CV ingestion only** — Re-scan `cv-variants/`, convert any new `.docx` files, and regenerate `references/cv-variants.md`. Does not change personal details, writing preferences, or config.
+  - Personal details (Step 1)
+  - Domain configuration (Step 2)
+  - Writing preferences (Steps 3–4)
+  - Everything (full setup)
+
+  If "CV ingestion only" is selected, skip directly to Step 5 then regenerate `references/cv-variants.md`. Do not modify `config.yaml` or `references/writing-standards.md`.
 - If it does not exist, run the full setup flow from Step 1.
 
 Check that Python dependencies are available:
